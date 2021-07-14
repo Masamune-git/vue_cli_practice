@@ -25,6 +25,7 @@
               <a v-show="item.edit" class="red" href="#" v-on:click="notEdit(item)">
                 {{ item.comment.split('\n')[0] }}
               </a>
+              <p v-show="!item.edit">{{ item.comment.split('\n')[0] }}</p>
             </li>
           </ul>
         </div>
@@ -45,9 +46,8 @@
       <form class="edit-form" v-on:submit.prevent="doUpdate(editId)">        
         <textarea class="edit-cancel-textarea" ref="comment" cols="30" rows="10" v-model="memos[editId].comment">          
         </textarea>
-        <button type="submit">更新</button>
-        <!-- <button type="button" v-on:click="editMemoData.edit = false">キャンセル</button>
-        <button type="button" v-on:click="doRemove(editMemoData)">削除</button> -->
+        <button type="submit">更新</button>        
+        <button type="button" v-on:click="doRemove(editMemoData)">削除</button>
         <button class="edit-cancel-bottun" type="button" v-on:click="notEdit(editMemoData)">キャンセル</button>  
       </form>
     </div>
@@ -112,6 +112,7 @@ export default {
     doRemove: function (item) {
       const index = this.memos.indexOf(item)
       this.memos.splice(index, 1)
+      this.editMemoVisible = false
     },
     doEdit: function (item) {
       const index = this.memos.indexOf(item)
