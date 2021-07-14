@@ -8,7 +8,7 @@ cd vue_cli_practice/app
 
 ## 起動方法
 ```
-npm i
+npm ci
 npm run serve
 ```
 
