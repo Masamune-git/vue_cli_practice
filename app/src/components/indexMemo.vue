@@ -44,7 +44,7 @@
       
       <p>メモの編集</p>
       <form class="edit-form" v-on:submit.prevent="doUpdate(editId)">        
-        <textarea class="edit-cancel-textarea" ref="comment" cols="30" rows="10" v-model="memos[editId].comment">          
+        <textarea class="edit-cancel-textarea" ref="comment" cols="30" rows="10" v-model="beforeComment">          
         </textarea>
         <button type="submit">更新</button>        
         <button type="button" v-on:click="doRemove(editMemoData)">削除</button>
@@ -80,7 +80,8 @@ export default {
       createMemoVisible: false,
       editMemoVisible: false,
       editMemoData: null,
-      editId: null,
+      beforeComment: null,
+      editId: null
     }
   },
   created () {
@@ -117,6 +118,7 @@ export default {
     doEdit: function (item) {
       const index = this.memos.indexOf(item)
       this.editMemoData = this.memos[index]
+      this.beforeComment = this.memos[index].comment
       this.editId = index
       item.edit = true
       this.editMemoVisible = true
