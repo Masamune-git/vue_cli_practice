@@ -30,8 +30,8 @@
           </ul>
         </div>
       </div>
-      <div class="create-memo" v-show="createMemoVisible">
-        <h2>メモの追加</h2>
+      <h2>メモの追加</h2>
+      <div class="create-memo" v-show="createMemoVisible">        
         <form class="add-form" v-on:submit.prevent="doAdd">
           <textarea id="memo-textarea" ref="comment" cols="30" rows="10"></textarea>
           <button type="submit" v-on:click="createMemoVisible = !createMemoVisible">追加</button>
@@ -141,6 +141,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+button {
+  border-radius:5px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.5 ;
+}
+
 #indexMemo {
   display:flex;
   flex-wrap: nowrap;
@@ -168,6 +178,10 @@ export default {
   height: auto;
   width: 60%;
   display: inline-block;
+}
+
+.edit-cancel-textarea {
+  margin: 0 100% 0 0;
 }
 
 </style>

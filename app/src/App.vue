@@ -1,12 +1,9 @@
 <template>
-  <div id="app">
-      <indexMemo/>
-  </div>
+  <indexMemo/>
 </template>
 
 <script>
 import indexMemo from './components/indexMemo.vue'
-// import Test from './components/test.vue'
 
 export default {
   name:'app',
