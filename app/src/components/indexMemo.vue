@@ -146,11 +146,9 @@ button {
   margin: 10px;
   cursor: pointer;
 }
-
 button:hover {
   opacity: 0.5 ;
 }
-
 #indexMemo {
   display:flex;
   flex-wrap: nowrap;
@@ -165,23 +163,18 @@ button:hover {
   list-style: none;
   padding-left: 0;
 }
-
 .add-form {
   display: inline-block;
 }
-
 .add-form textarea{
   width: 100%;
 }
-
 .indexMemo-edit-container{  
   height: auto;
   width: 60%;
   display: inline-block;
 }
-
 .edit-cancel-textarea {
   margin: 0 100% 0 0;
 }
-
 </style>
