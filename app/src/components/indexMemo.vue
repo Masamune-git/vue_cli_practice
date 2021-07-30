@@ -6,26 +6,26 @@
         <h2>一覧</h2>
         <div v-if="!editMemoVisible">
           <ul 
-            v-for="item in memos"
-            v-bind:key="item.id"
+            v-for="memo in memos"
+            v-bind:key="memo.id"
           >        
             <li >
-              <a v-show="!item.edit" href="#" v-on:click="doEdit(item)">
-                {{ item.comment.split('\n')[0] }}
+              <a v-show="!memo.edit" href="#" v-on:click="doEdit(memo)">
+                {{ memo.comment.split('\n')[0] }}
               </a>
             </li>
           </ul>
         </div>
         <div v-if="editMemoVisible">
           <ul  
-            v-for="item in memos"
-            v-bind:key="item.id"
+            v-for="memo in memos"
+            v-bind:key="memo.id"
           >
             <li >
-              <a v-show="item.edit" class="red" href="#" v-on:click="notEdit(item)">
-                {{ item.comment.split('\n')[0] }}
+              <a v-show="memo.edit" class="red" href="#" v-on:click="notEdit(memo)">
+                {{ memo.comment.split('\n')[0] }}
               </a>
-              <p v-show="!item.edit">{{ item.comment.split('\n')[0] }}</p>
+              <p v-show="!memo.edit">{{ memo.comment.split('\n')[0] }}</p>
             </li>
           </ul>
         </div>
@@ -110,21 +110,21 @@ export default {
       this.editMemoVisible = false
       comment.value = ''
     },
-    doRemove: function (item) {
-      const index = this.memos.indexOf(item)
+    doRemove: function (memo) {
+      const index = this.memos.indexOf(memo)
       this.memos.splice(index, 1)
       this.editMemoVisible = false
     },
-    doEdit: function (item) {
-      const index = this.memos.indexOf(item)
+    doEdit: function (memo) {
+      const index = this.memos.indexOf(memo)
       this.editMemoData = this.memos[index]
       this.beforeComment = this.memos[index].comment
       this.editId = index
-      item.edit = true
+      memo.edit = true
       this.editMemoVisible = true
     },
-    notEdit: function (item) {
-      item.edit = false
+    notEdit: function (memo) {
+      memo.edit = false
       this.editMemoVisible = false
     }
   },
