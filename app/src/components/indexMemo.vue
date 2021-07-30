@@ -32,7 +32,7 @@
       <h2>メモの追加</h2>
       <div class="create-memo" v-show="createMemoVisible">        
         <form class="add-form" @submit.prevent="doAdd">
-          <textarea id="memo-textarea" ref="comment" cols="30" rows="10"></textarea>
+          <textarea ref="comment" cols="30" rows="10"></textarea>
           <button type="submit" @click="createMemoVisible = !createMemoVisible">追加</button>
           <button type="button" @click="createMemoVisible = !createMemoVisible">キャンセル</button>
         </form>
