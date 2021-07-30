@@ -19,7 +19,7 @@
       <h2>メモの追加</h2>
       <div class="create-memo" v-show="createMemoVisible">        
         <form class="add-form" @submit.prevent="doAdd">
-          <textarea ref="comment" cols="30" rows="10"></textarea>
+          <textarea v-model="newMemoText" cols="30" rows="10"></textarea>
           <button type="submit" @click="createMemoVisibleChange">追加</button>
           <button type="button" @click="createMemoVisibleChange">キャンセル</button>
         </form>
@@ -29,7 +29,7 @@
     <div v-if="editMemoVisible" class="index-memo-edit-container">      
       <p>メモの編集</p>
       <form class="edit-form" @submit.prevent="doUpdate(editMemoData)">        
-        <textarea class="edit-cancel-textarea" ref="comment" cols="30" rows="10" v-model="beforeComment">          
+        <textarea class="edit-cancel-textarea" v-model="editMemoText" cols="30" rows="10">          
         </textarea>
         <button type="submit">更新</button>        
         <button type="button" @click="doRemove(editMemoData)">削除</button>
@@ -65,8 +65,9 @@ export default {
       createMemoVisible: false,
       editMemoVisible: false,
       editMemoData: null,
-      beforeComment: null,
-      editId: null
+      editId: null,
+      newMemoText: null,
+      editMemoText: null
     }
   },
   created () {
@@ -74,26 +75,24 @@ export default {
   },
   methods: {
     doAdd () {
-      const comment = this.$refs.comment
-      if (!comment.value.length) {
+      if (!this.newMemoText.length) {
         return
       }
       this.memos.push({
         id: memostorage.uid++,
-        comment: comment.value
+        comment: this.newMemoText
       })
-      comment.value = ''
+      this.newMemoText = null
     },
     doUpdate (memo) {
-      const comment = this.$refs.comment
       const index = this.memos.indexOf(memo)
       this.editMemoData = this.memos[index]
-      if (!comment.value.length) {
+      if (!this.editMemoText.length) {
         return
       }
-      this.editMemoData.comment = comment.value
+      this.editMemoData.comment = this.editMemoText
       this.editMemoVisible = false
-      comment.value = ''
+      this.editMemoText = null
     },
     doRemove (memo) {
       const index = this.memos.indexOf(memo)
@@ -103,7 +102,7 @@ export default {
     doEdit (memo) {
       const index = this.memos.indexOf(memo)
       this.editMemoData = this.memos[index]
-      this.beforeComment = this.memos[index].comment
+      this.editMemoText = this.memos[index].comment
       this.editId = index
       this.editMemoVisible = true
     },
