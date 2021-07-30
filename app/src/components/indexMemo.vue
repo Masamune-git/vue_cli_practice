@@ -7,7 +7,7 @@
         <div v-if="!editMemoVisible">
           <ul 
             v-for="memo in memos"
-            v-bind:key="memo.id"
+            :key="memo.id"
           >        
             <li >
               <a v-show="!memo.edit" href="#" @click="doEdit(memo)">
@@ -19,7 +19,7 @@
         <div v-if="editMemoVisible">
           <ul  
             v-for="memo in memos"
-            v-bind:key="memo.id"
+            :key="memo.id"
           >
             <li >
               <a v-show="memo.edit" class="red" href="#" @click="notEdit(memo)">
