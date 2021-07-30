@@ -10,7 +10,7 @@
             v-bind:key="memo.id"
           >        
             <li >
-              <a v-show="!memo.edit" href="#" v-on:click="doEdit(memo)">
+              <a v-show="!memo.edit" href="#" @click="doEdit(memo)">
                 {{ memo.comment.split('\n')[0] }}
               </a>
             </li>
@@ -22,7 +22,7 @@
             v-bind:key="memo.id"
           >
             <li >
-              <a v-show="memo.edit" class="red" href="#" v-on:click="notEdit(memo)">
+              <a v-show="memo.edit" class="red" href="#" @click="notEdit(memo)">
                 {{ memo.comment.split('\n')[0] }}
               </a>
               <p v-show="!memo.edit">{{ memo.comment.split('\n')[0] }}</p>
@@ -32,23 +32,23 @@
       </div>
       <h2>メモの追加</h2>
       <div class="create-memo" v-show="createMemoVisible">        
-        <form class="add-form" v-on:submit.prevent="doAdd">
+        <form class="add-form" @submit.prevent="doAdd">
           <textarea id="memo-textarea" ref="comment" cols="30" rows="10"></textarea>
-          <button type="submit" v-on:click="createMemoVisible = !createMemoVisible">追加</button>
-          <button type="button" v-on:click="createMemoVisible = !createMemoVisible">キャンセル</button>
+          <button type="submit" @click="createMemoVisible = !createMemoVisible">追加</button>
+          <button type="button" @click="createMemoVisible = !createMemoVisible">キャンセル</button>
         </form>
       </div>
-      <a v-show="!createMemoVisible" href="#" v-on:click="createMemoVisible = !createMemoVisible">+</a>
+      <a v-show="!createMemoVisible" href="#" @click="createMemoVisible = !createMemoVisible">+</a>
     </div>
     <div v-if="editMemoVisible" class="indexMemo-edit-container">
       
       <p>メモの編集</p>
-      <form class="edit-form" v-on:submit.prevent="doUpdate(editId)">        
+      <form class="edit-form" @submit.prevent="doUpdate(editId)">        
         <textarea class="edit-cancel-textarea" ref="comment" cols="30" rows="10" v-model="beforeComment">          
         </textarea>
         <button type="submit">更新</button>        
-        <button type="button" v-on:click="doRemove(editMemoData)">削除</button>
-        <button class="edit-cancel-bottun" type="button" v-on:click="notEdit(editMemoData)">キャンセル</button>  
+        <button type="button" @click="doRemove(editMemoData)">削除</button>
+        <button class="edit-cancel-bottun" type="button" @click="notEdit(editMemoData)">キャンセル</button>  
       </form>
     </div>
   </div>
