@@ -83,6 +83,7 @@ export default {
         comment: this.newMemoText
       })
       this.newMemoText = null
+      memostorage.save(this.memos)
     },
     doUpdate (memo) {
       const index = this.memos.indexOf(memo)
@@ -93,11 +94,13 @@ export default {
       this.editMemoData.comment = this.editMemoText
       this.editMemoVisible = false
       this.editMemoText = null
+      memostorage.save(this.memos)
     },
     doRemove (memo) {
       const index = this.memos.indexOf(memo)
       this.memos.splice(index, 1)
       this.editMemoVisible = false
+      memostorage.save(this.memos)
     },
     doEdit (memo) {
       const index = this.memos.indexOf(memo)
@@ -112,14 +115,6 @@ export default {
     createMemoVisibleChange (){
       const createMemoVisible = this.createMemoVisible
       this.createMemoVisible = !createMemoVisible
-    }
-  },
-  watch: {
-    memos: {
-      handler (memos) {
-        memostorage.save(memos)
-      },
-      deep: true
     }
   }
 }
