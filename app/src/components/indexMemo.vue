@@ -57,7 +57,7 @@
 <script>
 const STORAGE_KEY = 'memo_app_vue'
 const memostorage = {
-  fetch: function () {
+  fetch () {
     const memos = JSON.parse(
       localStorage.getItem(STORAGE_KEY) || '[]'
     )
@@ -67,7 +67,7 @@ const memostorage = {
     memostorage.uid = memos.length
     return memos
   },
-  save: function (memos) {
+  save (memos) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(memos))
   }
 }
@@ -88,7 +88,7 @@ export default {
     this.memos = memostorage.fetch()
   },
   methods: {
-    doAdd: function () {
+    doAdd () {
       const comment = this.$refs.comment
       if (!comment.value.length) {
         return
@@ -100,7 +100,7 @@ export default {
       })
       comment.value = ''
     },
-    doUpdate: function (id) {
+    doUpdate (id) {
       const comment = this.$refs.comment
       if (!comment.value.length) {
         return
@@ -110,12 +110,12 @@ export default {
       this.editMemoVisible = false
       comment.value = ''
     },
-    doRemove: function (memo) {
+    doRemove (memo) {
       const index = this.memos.indexOf(memo)
       this.memos.splice(index, 1)
       this.editMemoVisible = false
     },
-    doEdit: function (memo) {
+    doEdit (memo) {
       const index = this.memos.indexOf(memo)
       this.editMemoData = this.memos[index]
       this.beforeComment = this.memos[index].comment
@@ -123,14 +123,14 @@ export default {
       memo.edit = true
       this.editMemoVisible = true
     },
-    notEdit: function (memo) {
+    notEdit (memo) {
       memo.edit = false
       this.editMemoVisible = false
     }
   },
   watch: {
     memos: {
-      handler: function (memos) {
+      handler (memos) {
         memostorage.save(memos)
       },
       deep: true
