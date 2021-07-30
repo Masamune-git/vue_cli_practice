@@ -3,26 +3,13 @@
     <div class="index-memo-main-container">      
       <div class="index-memo">
         <h2>一覧</h2>
-        <div v-if="editMemoVisible">
-          <ul  
-            v-for="memo in memos"
-            :key="memo.id"
-          >
-            <li >
-              <a v-show="memo.edit" @click.prevent="editCancel(memo)">
-                {{ memo.comment.split('\n')[0] }}
-              </a>
-              <p v-show="!memo.edit">{{ memo.comment.split('\n')[0] }}</p>
-            </li>
-          </ul>
-        </div>
-        <div v-else>
+        <div>
           <ul 
             v-for="memo in memos"
             :key="memo.id"
           >        
             <li >
-              <a v-show="!memo.edit" @click.prevent="doEdit(memo)">
+              <a @click.prevent="doEdit(memo)">
                 {{ memo.comment.split('\n')[0] }}
               </a>
             </li>
@@ -33,21 +20,20 @@
       <div class="create-memo" v-show="createMemoVisible">        
         <form class="add-form" @submit.prevent="doAdd">
           <textarea ref="comment" cols="30" rows="10"></textarea>
-          <button type="submit" @click="createMemoVisible = !createMemoVisible">追加</button>
-          <button type="button" @click="createMemoVisible = !createMemoVisible">キャンセル</button>
+          <button type="submit" @click="createMemoVisibleChange">追加</button>
+          <button type="button" @click="createMemoVisibleChange">キャンセル</button>
         </form>
       </div>
-      <a v-show="!createMemoVisible" @click.prevent="createMemoVisible = !createMemoVisible">+</a>
+      <a v-show="!createMemoVisible" @click.prevent="createMemoVisibleChange">+</a>
     </div>
-    <div v-if="editMemoVisible" class="index-memo-edit-container">
-      
+    <div v-if="editMemoVisible" class="index-memo-edit-container">      
       <p>メモの編集</p>
       <form class="edit-form" @submit.prevent="doUpdate(editMemoData)">        
         <textarea class="edit-cancel-textarea" ref="comment" cols="30" rows="10" v-model="beforeComment">          
         </textarea>
         <button type="submit">更新</button>        
         <button type="button" @click="doRemove(editMemoData)">削除</button>
-        <button class="edit-cancel-bottun" type="button" @click="editCancel(editMemoData)">キャンセル</button>  
+        <button class="edit-cancel-bottun" type="button" @click="editCancel">キャンセル</button>  
       </form>
     </div>
   </div>
@@ -94,8 +80,7 @@ export default {
       }
       this.memos.push({
         id: memostorage.uid++,
-        comment: comment.value,
-        edit: false
+        comment: comment.value
       })
       comment.value = ''
     },
@@ -107,7 +92,6 @@ export default {
         return
       }
       this.editMemoData.comment = comment.value
-      this.editMemoData.edit = false
       this.editMemoVisible = false
       comment.value = ''
     },
@@ -121,12 +105,14 @@ export default {
       this.editMemoData = this.memos[index]
       this.beforeComment = this.memos[index].comment
       this.editId = index
-      memo.edit = true
       this.editMemoVisible = true
     },
-    editCancel (memo) {
-      memo.edit = false
+    editCancel () {
       this.editMemoVisible = false
+    },
+    createMemoVisibleChange (){
+      const createMemoVisible = this.createMemoVisible
+      this.createMemoVisible = !createMemoVisible
     }
   },
   watch: {
