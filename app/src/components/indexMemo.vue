@@ -42,7 +42,7 @@
     <div v-if="editMemoVisible" class="index-memo-edit-container">
       
       <p>メモの編集</p>
-      <form class="edit-form" @submit.prevent="doUpdate(editId)">        
+      <form class="edit-form" @submit.prevent="doUpdate(editMemoData)">        
         <textarea class="edit-cancel-textarea" ref="comment" cols="30" rows="10" v-model="beforeComment">          
         </textarea>
         <button type="submit">更新</button>        
@@ -99,13 +99,15 @@ export default {
       })
       comment.value = ''
     },
-    doUpdate (id) {
+    doUpdate (memo) {
       const comment = this.$refs.comment
+      const index = this.memos.indexOf(memo)
+      this.editMemoData = this.memos[index]
       if (!comment.value.length) {
         return
       }
-      this.memos[id].comment = comment.value
-      this.memos[id].edit = false
+      this.editMemoData.comment = comment.value
+      this.editMemoData.edit = false
       this.editMemoVisible = false
       comment.value = ''
     },
@@ -135,7 +137,7 @@ export default {
       deep: true
     }
   }
-  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
