@@ -9,7 +9,7 @@
             :key="memo.id"
           >
             <li >
-              <a v-show="memo.edit" @click.prevent="notEdit(memo)">
+              <a v-show="memo.edit" @click.prevent="editCancel(memo)">
                 {{ memo.comment.split('\n')[0] }}
               </a>
               <p v-show="!memo.edit">{{ memo.comment.split('\n')[0] }}</p>
@@ -47,7 +47,7 @@
         </textarea>
         <button type="submit">更新</button>        
         <button type="button" @click="doRemove(editMemoData)">削除</button>
-        <button class="edit-cancel-bottun" type="button" @click="notEdit(editMemoData)">キャンセル</button>  
+        <button class="edit-cancel-bottun" type="button" @click="editCancel(editMemoData)">キャンセル</button>  
       </form>
     </div>
   </div>
@@ -122,7 +122,7 @@ export default {
       memo.edit = true
       this.editMemoVisible = true
     },
-    notEdit (memo) {
+    editCancel (memo) {
       memo.edit = false
       this.editMemoVisible = false
     }
