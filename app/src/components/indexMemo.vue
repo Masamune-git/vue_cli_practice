@@ -1,6 +1,6 @@
 <template>
-    <div id="indexMemo">    
-    <div class="indexMemo-main-container">
+    <div id="index-memo">    
+    <div class="index-memo-main-container">
       
       <div class="index-memo">
         <h2>一覧</h2>
@@ -40,7 +40,7 @@
       </div>
       <a v-show="!createMemoVisible" href="#" @click="createMemoVisible = !createMemoVisible">+</a>
     </div>
-    <div v-if="editMemoVisible" class="indexMemo-edit-container">
+    <div v-if="editMemoVisible" class="index-memo-edit-container">
       
       <p>メモの編集</p>
       <form class="edit-form" @submit.prevent="doUpdate(editId)">        
@@ -73,7 +73,7 @@ const memostorage = {
 }
 
 export default {
-  name: 'indexMemo',
+  name: 'index-memo',
   data() {
     return{
       memos: [],
@@ -149,12 +149,12 @@ button {
 button:hover {
   opacity: 0.5 ;
 }
-#indexMemo {
+#index-memo {
   display:flex;
   flex-wrap: nowrap;
   width:100%;
 }
-.indexMemo-main-container {
+.index-memo-main-container {
   height: auto;
   width: 30%;
   display: inline-block;
@@ -169,7 +169,7 @@ button:hover {
 .add-form textarea{
   width: 100%;
 }
-.indexMemo-edit-container{  
+.index-memo-edit-container{  
   height: auto;
   width: 60%;
   display: inline-block;
