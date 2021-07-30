@@ -10,7 +10,7 @@
             :key="memo.id"
           >        
             <li >
-              <a v-show="!memo.edit" href="#" @click="doEdit(memo)">
+              <a v-show="!memo.edit" @click.prevent="doEdit(memo)">
                 {{ memo.comment.split('\n')[0] }}
               </a>
             </li>
@@ -22,7 +22,7 @@
             :key="memo.id"
           >
             <li >
-              <a v-show="memo.edit" class="red" href="#" @click="notEdit(memo)">
+              <a v-show="memo.edit" @click.prevent="notEdit(memo)">
                 {{ memo.comment.split('\n')[0] }}
               </a>
               <p v-show="!memo.edit">{{ memo.comment.split('\n')[0] }}</p>
@@ -38,7 +38,7 @@
           <button type="button" @click="createMemoVisible = !createMemoVisible">キャンセル</button>
         </form>
       </div>
-      <a v-show="!createMemoVisible" href="#" @click="createMemoVisible = !createMemoVisible">+</a>
+      <a v-show="!createMemoVisible" @click.prevent="createMemoVisible = !createMemoVisible">+</a>
     </div>
     <div v-if="editMemoVisible" class="index-memo-edit-container">
       
@@ -141,10 +141,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+a {
+  color: blueviolet;
+  text-decoration: underline;
+  cursor: pointer; 
+}
 button {
   border-radius:5px;
   margin: 10px;
-  cursor: pointer;
+  cursor: pointer; 
 }
 button:hover {
   opacity: 0.5 ;
