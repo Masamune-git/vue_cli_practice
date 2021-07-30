@@ -1,21 +1,8 @@
 <template>
     <div id="index-memo">    
-    <div class="index-memo-main-container">
-      
+    <div class="index-memo-main-container">      
       <div class="index-memo">
         <h2>一覧</h2>
-        <div v-if="!editMemoVisible">
-          <ul 
-            v-for="memo in memos"
-            :key="memo.id"
-          >        
-            <li >
-              <a v-show="!memo.edit" @click.prevent="doEdit(memo)">
-                {{ memo.comment.split('\n')[0] }}
-              </a>
-            </li>
-          </ul>
-        </div>
         <div v-if="editMemoVisible">
           <ul  
             v-for="memo in memos"
@@ -29,6 +16,18 @@
             </li>
           </ul>
         </div>
+        <div v-else>
+          <ul 
+            v-for="memo in memos"
+            :key="memo.id"
+          >        
+            <li >
+              <a v-show="!memo.edit" @click.prevent="doEdit(memo)">
+                {{ memo.comment.split('\n')[0] }}
+              </a>
+            </li>
+          </ul>
+        </div>        
       </div>
       <h2>メモの追加</h2>
       <div class="create-memo" v-show="createMemoVisible">        
